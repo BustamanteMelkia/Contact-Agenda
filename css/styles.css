@@ -1,0 +1,28 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    color: #5C9396;
+    color: #9BC0B9;
+    color: #CCD9CF;
+    color: #F7EDD2;
+    color: #0B1828;
+}
+/* HEADER */
+.header{
+    background-color: #5C9396;
+    padding: 2rem 0;
+}
+.header h1{
+    text-align: center;
+    color: #F7EDD2;
+}
