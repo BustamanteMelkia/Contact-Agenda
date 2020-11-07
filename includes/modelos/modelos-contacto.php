@@ -31,7 +31,7 @@
             $conn->close();
         } catch (Exception $e) {
             $response = array(
-                'error' => $e.getMessage()
+                'error' => 'Lo siento, hubo un error'
             );
         }
         echo json_encode($response);

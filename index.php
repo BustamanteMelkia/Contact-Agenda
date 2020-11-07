@@ -1,4 +1,9 @@
-<?php include 'includes/layout/header.php' ?> <!--Importar la cabecera de la página-->
+<?php 
+
+include 'includes/layout/header.php' ;
+include 'includes/funciones/consultas.php';
+
+?>
 <header class="header">
     <h1>Contact Agenda <i class="far fa-address-book"></i></h1>
 </header>
@@ -27,34 +32,24 @@
                     <th class="cell">Options</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr class="table-row">
-                    <td class="cell" data-label="Name">Melkia</td>
-                    <td class="cell" data-label="Organization">Buap</td>
-                    <td class="cell" data-label="Telephone">2215953097</td>
-                    <td class="cell options" data-label="Options">
-                        <a href="edit.php?id=123"><i class="fas fa-user-edit"></i></a>
-                        <a href="#"><i class="fas fa-trash-alt"></i></a>
-                    </td>
-                </tr>
-                <tr class="table-row">
-                    <td class="cell" data-label="Name">David</td>
-                    <td class="cell" data-label="Organization">Buap</td>
-                    <td class="cell" data-label="Telephone">2215953097</td>
-                    <td class="cell options" data-label="Options">
-                        <a href="edit.php?id=234"><i class="fas fa-user-edit"></i></a>
-                        <a href="#"><i class="fas fa-trash-alt"></i></a>
-                    </td>
-                </tr>
-                <tr class="table-row">
-                    <td class="cell" data-label="Name">Enrique</td>
-                    <td class="cell" data-label="Organization">Buap</td>
-                    <td class="cell" data-label="Telephone">123456789</td>
-                    <td class="cell options" data-label="Options">
-                        <a href="edit.php?id=234"><i class="fas fa-user-edit"></i></a>
-                        <a href="#"><i class="fas fa-trash-alt"></i></a>
-                    </td>
-                </tr>
+            <tbody id="table-body">
+                <?php
+                    $contactos = obtenerContactos();
+                    if($contactos->num_rows){
+                        foreach ($contactos as $contacto) { ?>
+                            <tr class="table-row">
+                                <td class="cell" data-label="Name"><?php echo $contacto['nombre'] ?></td>
+                                <td class="cell" data-label="Organization"><?php echo $contacto['empresa'] ?></td>
+                                <td class="cell" data-label="Telephone"><?php echo $contacto['telefono'] ?></td>
+                                <td class="cell options" data-label="Options">
+                                    <a href="edit.php?id=<?php echo $contacto['id'] ?>"><i class="fas fa-user-edit"></i></a>
+                                    <button data-id="<?php echo $contacto['id'] ?>"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        
+                <?php   }
+                    }
+                ?>
             </tbody>
         </table>
     </section>

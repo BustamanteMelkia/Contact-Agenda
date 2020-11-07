@@ -23,13 +23,29 @@ async function validarFormulario(e){
         if(accion === 'crear'){
             try {
                 const response = await insertarBD(data,url);
-                console.log(response);
+                renderContacto(response.datos);
+                formulario.reset();
+                mostrarNotificacion('Contacto agregado con éxito', 'success');
             } catch (error) {
                 console.error(error);
             }
         }
-            
     }
+}
+
+function renderContacto(data){
+    const tableRow = document.createElement('tr');
+    const tableBody = document.getElementById('table-body');
+    tableRow.classList.add('table-row');
+    tableRow.innerHTML = `
+        <td class="cell" data-label="Name">${data.nombre}</td>
+        <td class="cell" data-label="Organization">${data.empresa}</td>
+        <td class="cell" data-label="Telephone">${data.telefono}</td>
+        <td class="cell options" data-label="Options">
+            <a href="edit.php?id=${data.id}"><i class="fas fa-user-edit"></i></a>
+            <button data-id=${data.id}><i class="fas fa-trash-alt"></i></button>
+        </td>`;
+    tableBody.appendChild(tableRow);
 }
 
 function mostrarNotificacion(mensaje, clase){
@@ -50,8 +66,9 @@ function insertarBD(data,url){
         xhr.onload = function(){
             if(this.status === 200)
                 resolve(JSON.parse(xhr.responseText));
-            else
+            else{
                 reject(JSON.parse(xhr.responseText));
+            }
         }
         xhr.send(data);
     });

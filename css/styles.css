@@ -132,8 +132,11 @@ thead{
     margin-right: 1rem;
     border-right: 1px solid var(--light);
 }
-.options a{
+.options a,
+.options button{
     color: var(--primary);
+    cursor: pointer;
+    border: none;
 }
 
 /* Edit.php */
